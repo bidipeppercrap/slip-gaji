@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Salary Invoice</title>
+    <style>
+        body {
+            margin: 0;
+            border-style: solid;
+            border-color: black;
+            border-width: 2px;
+        }
+
+        #app {
+            display: grid;
+        }
+
+        .header {
+            margin: 10px;
+            margin-bottom: 0;
+            display: grid;
+            grid-template-areas: "t" "s" "sg";
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto auto;
+            grid-gap: 10px;
+        }
+
+        .header > h1 {
+            grid-area: t;
+            font-size: 25px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            text-align: center;
+        }
+
+        .header > h2 {
+            margin: 0;
+            grid-area: sg;
+            font-size: 50px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+        }
+
+        .separator {
+            grid-area: s;
+            background-color: black;
+            height: 2px;
+        }
+
+        .main {
+            display: grid;
+            grid-template-areas: "d" "s" "sign";
+            grid-template-columns: auto;
+            grid-template-rows: auto auto auto;
+            grid-gap: 10px;
+            margin: 10px;
+        }
+
+        .borderize {
+            border-style: solid;
+            border-color: black;
+            border-width: 2px;
+        }
+
+        .detail {
+            grid-area: d;
+            padding: 10px;
+        }
+
+        .detail-item {
+            display: flex;
+        }
+
+        .detail-item > .question,
+        .detail-item > .answer {
+            font-size: 15px;
+        }
+
+        .detail-item > .question {
+            width: 100px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .detail-item > .answer {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        .salary {
+            grid-area: s;
+            padding: 10px;
+        }
+
+        .salary > .separator {
+            margin: 5px 0;
+        }
+
+        .sign {
+            margin-top: 10px;
+            grid-area: sign;
+            display: grid;
+            grid-template-areas: "r s a";
+            grid-template-columns: 200px 1fr 200px;
+        }
+
+        .sign-item > .sign-title,
+        .sign-item > .sign-name {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .sign-item > .sign-name {
+            font-weight: bold;
+        }
+
+        .sign-employee {
+            grid-area: r;
+        }
+
+        .sign-employer {
+            grid-area: a;
+        }
+
+        .sign-separator {
+            grid-area: s;
+        }
+
+        .signature {
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header class="header">
+            <h1>CV. KARYA BERSAMA EXPRESS</h1>
+            <div class="separator"></div>
+            <h2>SLIP GAJI</h2>
+        </header>
+        <main class="main">
+            <section class="detail borderize">
+                <div class="detail-item">
+                    <div class="question">Tanggal:</div>
+                    <div class="answer" id="date"></div>
+                </div>
+                <div class="detail-item">
+                    <div class="question">Nama:</div>
+                    <div class="answer" id="employeeName"></div>
+                </div>
+            </section>
+            <section class="salary borderize">
+                <div class="detail-item">
+                    <div class="question">Gaji Pokok:</div>
+                    <div class="answer" id="mainSalary"></div>
+                </div>
+                <div class="detail-item">
+                    <div class="question">Potongan (-):</div>
+                    <div class="answer" id="discount"></div>
+                </div>
+                <div class="separator"></div>
+                <div class="detail-item">
+                    <div class="question">Gaji Bersih:</div>
+                    <div class="answer" id="finalSalary"></div>
+                </div>
+            </section>
+            <section class="sign">
+                <div class="sign-item sign-employee">
+                    <div class="sign-title">Diterima</div>
+                    <div class="signature"></div>
+                    <div class="sign-name" id="employeeName2"></div>
+                </div>
+                <div class="sign-separator"></div>
+                <div class="sign-item sign-employer">
+                    <div class="sign-title">Mengetahui</div>
+                    <div class="signature"></div>
+                    <div class="sign-name" id="employerName"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const employee = {
+            name: "Ramli"
+        };
+
+        const employer = {
+            name: "Budianto Wijaya"
+        };
+
+        const salary = "Rp" + "3,000,000";
+
+        function bootstrap() {
+            answer("date", "2019-03-20");
+            answer("mainSalary", salary);
+            answer("discount", "Rp0");
+            answer("finalSalary", salary);
+            answer("employeeName", employee.name);
+            answer("employeeName2", employee.name);
+            answer("employerName", employer.name);
+        }
+
+        function answer(id, answer) {
+            document.querySelector(`#${id}`).innerHTML = answer;
+        }
+
+        bootstrap();
+    </script>
+</body>
+</html>
